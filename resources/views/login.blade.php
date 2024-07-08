@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    @include('sweetalert::alert')
+
 
     <div class="main">
 
@@ -32,12 +34,12 @@
                         <h2 class="form-title">Log In</h2>
                         <form action="/login" method="POST" class="register-form" id="login-form">
                             <div class="form-group">
-                                <label for="yourname"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="yourname" id="yourname" placeholder="Your Name"/>
+                                <label for="login_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="login_name" id="login_name" placeholder="Your Name"/>
                             </div>
                             <div class="form-group">
-                                <label for="yourpass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="yourpass" id="yourpass" placeholder="Password"/>
+                                <label for="login_password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="login_password" id="login_password" placeholder="Password"/>
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />

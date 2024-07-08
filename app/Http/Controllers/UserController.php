@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Alert;
-
+use Illuminate\Auth\Events\Registered;
+use RealRashid\SweetAlert\Facades\Alert;
+use \Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 class UserController extends Controller
@@ -19,13 +21,12 @@ class UserController extends Controller
            'password' => ['required', 'min:8', 'max:20'],
            'password_confirmation' => ['required', 'same:password' ,'min:8'] ,
         ]);
-
+//bcrypt($incomingdata['password']);
         $incomingdata['password'] = Hash::make('password');
         unset($password_confirmation);
         $user = User::create($incomingdata);
-
         auth()->login($user);
-        Alert::succsess('Congrats','You have Successfully Registered');
+        Alert::success('Congrats','You have Successfully Registered');
 
 
         return redirect('login');
@@ -34,21 +35,46 @@ class UserController extends Controller
     }
     public function login(Request $request) {
         $incomingdata = $request->validate([
-           'yourname' => ['required', 'min:3', 'max:20'],
-           'yourpass' => ['required', 'min:8', 'max:20'],
+           'login_name' => ['required'],
+           'login_password' => ['required'],
         ]);
-        if (auth()->attempt(['name' => $incomingdata['yourname'], 'password' => $incomingdata['yourpass']])) {
-            $request->session()->regenerate();
+        //dd($incomingdata);
+        if (auth()->attempt(['name' =>$incomingdata ['login_name'], 'password' =>$incomingdata ['login_password']])) {
+
+           $request->session()->regenerate( );
+           return redirect('/');
+
+
         }
+        else{
+            Alert::error('Sorry','Your data is invalid');
 
-        return redirect('/');
+            return redirect('login');
+
+
+
+
+    }
+
+    }
+
+    public function logout(Request $request)
+    {
+        $auth->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $auth->loggedOut($request) ?: redirect('/login');
     }
 
 
-    public function logout() {
-        auth()->logout();
-        return redirect('/login');
-    }
+
+
+
+
+
+
+
 
 
 

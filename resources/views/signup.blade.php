@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    @include('sweetalert::alert')
 
     <div class="main">
 
@@ -39,8 +40,8 @@
                                 <input type="password" name="password" id="pass" placeholder="Password"/>
                             </div>
                             <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <label for="password_confirmation"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Repeat your password"/>
                             </div>
 
                             <div class="form-group form-button">

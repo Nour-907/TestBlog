@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Blog Home </title>
+    <title>Blog</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -19,14 +19,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/post">Posts</a></li>
+                <li class="nav-item"><a class="nav-link" href="/createpost">Create a Post</a></li>
+                   @auth
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button>Log out</button>
+                    </form>
 
+                   @else
+                   <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
 
-
-                @if (Auth::check())
-                <li class="nav-item"><a class="nav-link" href="/login">Log Out</a></li>
-                @else
-                <li class="nav-item"><a class="nav-link" href="/login">Log IN</a></li>
-                @endif
+                   @endauth
 
 
 
@@ -38,11 +41,11 @@
 
 
 @yield('content')
-
+@yield('createpost')
 
 
 
  <!-- Footer-->
  <footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Mini Blog 2024</p></div>
 </footer>
